@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $user = User::first();
 
-    dispatch(new ReconcileAccount($user));
+    ReconcileAccount::dispatch($user);
 
     return 'finished';
 });
