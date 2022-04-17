@@ -1,5 +1,7 @@
 <?php
 
+use App\Jobs\ReconcileAccount;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    dispatch(function(){
-        logger('Running');
-    })->delay(now()->addMinutes(2));
+    $user = User::first();
+
+    dispatch(new ReconcileAccount($user));
 
     return 'finished';
 });
